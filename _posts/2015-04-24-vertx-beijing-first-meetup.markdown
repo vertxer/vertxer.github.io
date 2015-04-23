@@ -4,7 +4,7 @@ title:  "Vert.x User Group China Meetup #1!"
 date:   2015-04-23 09:00:00
 categories: meetup
 ---
-这是Vert.x中国用户社区(http://vertxer.org/)的首次Meetup，我们致力于分享Vert.x的最佳实践，切磋技术问题，贡献vert.x模块等。
+###这是Vert.x中国用户社区(http://vertxer.org/)的首次Meetup，我们致力于分享Vert.x的最佳实践，切磋技术问题，贡献vert.x模块等。
 
 1，Vert.x is a lightweight, high performance application platform for the JVM that’s designed for modern mobile, web, and enterprise applications.  http://vertx.io/ 
 
