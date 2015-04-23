@@ -2,7 +2,7 @@
 layout: post
 title:  "Welcome to Vertxer.org!"
 date:   2015-04-23 08:40:27
-categories: jekyll update
+categories: 
 ---
 Vert.x is a lightweight, high performance application platform for the JVM that's designed for modern mobile, web, and enterprise applications.
 
