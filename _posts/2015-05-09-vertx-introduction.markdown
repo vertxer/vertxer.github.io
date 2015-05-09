@@ -7,11 +7,16 @@ categories: meetup
 
 #Vert.x Introduction
 
-##Reactor模式
+##Slide
+[High performance reactive applications with Vert.x Tim Fox Red Hat](http://vertxer.org/resource/slide/High%20performance%20reactive%20applications%20with%20Vert.x%20Tim%20Fox%20Red%20Hat.pdf) | Tim Fox
+
+##Book
+[Real-time Web Application Development using Vert.x 2.0](http://vertxer.org/resource/book/Real-time%20Web%20Application%20Development%20using%20Vert.x%202.0.pdf) | Tero Parviainen
+
+##Reactor / Proactor
 
 Event loop + Work pool
 
-###Reactor / Proactor
 
 <http://en.wikipedia.org/wiki/Reactor_pattern>
 
