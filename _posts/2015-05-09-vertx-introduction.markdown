@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "Vert.x Introduction!"
+date:   2015-05-09 14:00:00
+categories: meetup
+---
+
 #Vert.x Introduction
 ##Reactor模式
 Event loop + Work pool
