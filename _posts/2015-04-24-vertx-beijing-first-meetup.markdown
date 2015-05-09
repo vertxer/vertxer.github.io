@@ -41,7 +41,7 @@ Vert.x is a lightweight, high performance application platform for the JVM that�
 
 
 
-下图是TechEmpower Round 8 测试结果【笔者补充：此类简单粗暴的测试不能代表一切，但也是个重要参考】，From<http://www.oschina.net/news/49158/undertow_vert_x_and_netty_benchmarks>
+下图是TechEmpower Round 8 测试结果【笔者补充：此类简单粗暴的测试不能代表一切，但也是个重要参考】，From <http://www.oschina.net/news/49158/undertow_vert_x_and_netty_benchmarks>
 
 ![](http://photos4.meetupstatic.com/photos/event/5/6/5/b/600_437002107.jpeg)
 
