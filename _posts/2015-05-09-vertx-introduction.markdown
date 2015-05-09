@@ -6,8 +6,11 @@ categories: meetup
 ---
 
 #Vert.x Introduction
+
 ##Reactor模式
+
 Event loop + Work pool
+
 ###Reactor / Proactor
 
 <http://en.wikipedia.org/wiki/Reactor_pattern>
