@@ -5,29 +5,36 @@ date:   2015-05-09 14:00:00
 categories: meetup
 ---
 
-#Vert.x Introduction
+#Vert.x Introduction|Vert.x介绍
 
-##Slide
+Vert.x <http://vertx.io/> 是一个轻量级的、高性能的、基于JVM的应用平台，非常适用于最新的移动端后台、互联网、企业应用架构。Vert.x基于全异步Java服务器Netty，扩展出了很多有用的特性：
+
+* Polyglot多语言，目前支持Java/JavaScript/Ruby/Python/Groovy/Clojure/Ceylon等。带来的直接好处是可以使用这些语言极大丰富的lib。
+* 传统多线程编程难度高且性能不佳。在适应了回调/异步编程风格后，可以轻松的实现高性能的无锁编程。
+* 通过Event Bus事件总线，可以轻松编写分布式解耦的程序，而且具有很好的扩展性。
+
+##Slide | Tim Fox的幻灯片
 [High performance reactive applications with Vert.x Tim Fox Red Hat](http://vertxer.org/resource/slide/High%20performance%20reactive%20applications%20with%20Vert.x%20Tim%20Fox%20Red%20Hat.pdf) | Tim Fox
 
-##Book
+##Book | 开发参考书
 [Real-time Web Application Development using Vert.x 2.0](http://vertxer.org/resource/book/Real-time%20Web%20Application%20Development%20using%20Vert.x%202.0.pdf) | Tero Parviainen
 
 ##Reactor / Proactor
 
-Event loop + Work pool
+Reactive模式，又称Reactor/Proactor模式（？？），关键词是Event loop + Work pool
 
+以下是一些重要的资料：
 
 <http://en.wikipedia.org/wiki/Reactor_pattern>
 
 [Reactor - An Object Behavioral Pattern for Concurrent Event Demultiplexing and Dispatching](http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.37.9570) | Douglas C. Schmidt, 1995
 
+###下边这篇文章建议一读：
 [Proactor - An Object Behavioral Pattern for Demultiplexing and Dispatching Handlers for Asynchronous Events](http://www.cs.wustl.edu/~schmidt/PDF/proactor.pdf) | Irfan Pyarali, Tim Harrison, and Douglas C. Schmidt, 1997
 
 [Reactor - an object behavioral pattern for demultiplexing and dispatching handles for synchronous events](http://www.cs.wustl.edu/~schmidt/PDF/reactor-siemens.pdf) | Douglas C. Schmidt, 1997
 
 [Architecture of a Highly Scalable NIO-Based Server](https://today.java.net/article/2007/02/08/architecture-highly-scalable-nio-based-server) | Gregor Roth, 2007
-
 
 
 
@@ -37,8 +44,6 @@ Event loop + Work pool
 ##Vert.x 2.x源码分析
 <https://github.com/eclipse/vert.x>
 
-##工程化最佳实践探讨
-//TODO
 
 #Vert.x vs Undertow
 1. From techempower's round 1 / round 8 / round 9 / round 10 benchmark result, undertow is very good (Both Throughout and Latency are excellent), and vert.x performance test results immediately follow undertow. But round9 JSON serialization tests show that undertow have certain error rate, so probably concluded that: vert.x performance slightly below undertow, but the stability is better than undertow.
@@ -46,7 +51,7 @@ Event loop + Work pool
 <https://www.techempower.com/benchmarks/>
 >Both Undertow and Vert.x's performance is way better than most people actually need. However we wouldn't recommend choosing a product on the basis of a few %age points of difference, usually there are much more important factors...
 
-2. From an architectural point of view vert.x and undertow are both non-block architecture, but vert.x is more suitable for Distributed System (event bus), and undertow is suitable for the embedded application (XNIO worker instance). Our security gateway product scene is distributed, it is more appropriate vert.x.
+2. From an architectural point of view vert.x and undertow are both non-block architecture, but vert.x is more suitable for Distributed System (event bus), and undertow is suitable for the embedded application (XNIO worker instance). Our product scene is distributed, it is more appropriate vert.x.
 <Http://vertx.io/manual.html>
 <Http://undertow.io/documentation/core/overview.html>
 >Vert.x does a *lot* more than Undertow. Undertow was originally designed as the replacement for the webserver in JBoss app server and that's its main purpose. Vert.x has a lot more functionality - UDP, DNS, TCP, File System, Event Bus, Sockjs, etc etc, etc. Also vert.x is polyglot (not just Java)
@@ -57,8 +62,10 @@ Event loop + Work pool
 4. from the health of the Road Map view, undertow belong JBoss Community (with my experience in the years since JBoss is an open source project launched most bland, such as JBoss Seam that been designed for chanlleging Spring Framework, lost finally), and has vert.x defected to the Eclipse Foundation (more powerful organization, behind IBM, at the same time Vert.x's former owner - VMware also supports Vert.x).
 >Red Hat employees most of the core engineers on _both_ Vert.x and Undertow. But Vert.x is the *official* reactive framework for Red Hat, and Vert.x is also an Eclipse project yes.
 
-#Vert.x 3.0 update
+#Vert.x 3.0 update | Vert.x 3.0更新
 <https://groups.google.com/forum/#!msg/vertx/_y_VqFQOVhs/r8zce-zzds0J>
+
+【笔者注】Vert.x3是对Vert.x2的重大升级，不仅仅是package从org.vertx到io.vertx的全面替换，一些重要的核心类也都做了破坏式的重构，几乎很难从vert.x2程序升级到vert.x3程序。下边是Vert.x3的一些功能升级。
 
 ###Code location 
 Vert.x 3.0 core is in the main Eclipse project: 
