@@ -6,17 +6,17 @@ categories: meetup
 ---
 Update meetup photo in 2015-05-09:
 
-![](../images/meetup_1_1.jpg)
+![](http://vertxer.org/images/meetup_1_1.jpg)
 >slide
 
 
-![](../images/meetup_1_2.jpg)
+![](http://vertxer.org/images/meetup_1_2.jpg)
 >talking about Vert.x Introduction
 
-![](../images/meetup_1_3.jpg)
+![](http://vertxer.org/images/meetup_1_3.jpg)
 >listening
 
-![](../images/meetup_1_4.jpg)
+![](http://vertxer.org/images/meetup_1_4.jpg)
 >talking about proactor pattern
 
 
