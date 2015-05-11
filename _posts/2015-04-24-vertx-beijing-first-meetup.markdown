@@ -4,6 +4,22 @@ title:  "Vert.x User Group China Meetup #1!"
 date:   2015-04-23 09:00:00
 categories: meetup
 ---
+Update meetup photo in 2015-05-09:
+
+![](../images/meetup_1_1.jpg)
+>slide
+
+
+![](../images/meetup_1_2.jpg)
+>talking about Vert.x Introduction
+
+![](../images/meetup_1_3.jpg)
+>listening
+
+![](../images/meetup_1_4.jpg)
+>talking about proactor pattern
+
+
 
 最新Meetup介绍请移步: <http://www.meetup.com/Vertx-Beijing/events/222040870/>
 
