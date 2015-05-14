@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Vert.x Introduction for CSDN Java 20 Year Anniversary!"
-date:   2015-05-09 14:00:00
+date:   2015-05-14 14:00:00
 categories: intro
 ---
 
@@ -24,16 +24,16 @@ Vert.x <http://vertx.io/> 是一个基于JVM的、轻量级的、高性能的应
 
 #Reactor模式
 
-考古了一下Reactor模式，其理论最早由Washington University的Douglas C. Schmidt教授在1995年提出，在这片论文中完整了做了介绍：[Proactor - An Object Behavioral Pattern for Demultiplexing and Dispatching Handlers for Asynchronous Events](http://www.cs.wustl.edu/~schmidt/PDF/proactor.pdf) 。下边对其展开分析：
+考古了一下Reactor模式，其理论最早由Washington University的Douglas C. Schmidt教授在1995年提出，在这片论文中完整了做了介绍：[Proactor - An Object Behavioral Pattern for Demultiplexing and Dispatching Handlers for Asynchronous Events](http://www.cs.wustl.edu/~schmidt/PDF/proactor.pdf) 。下边对其关键原理部分展开分析：
 
-![Figure 1: Typical Web Server Communication Software Ar- chitecture](http://vertxer.org/images/Figure 1- Typical Web Server Communication Software Ar- chitecture.jpg)
->上图是
+![Figure 1: Typical Web Server Communication Software Architecture](http://vertxer.org/images/Figure 1- Typical Web Server Communication Software Ar- chitecture.jpg)
+>上图描述了一个经典Web Server在收到Web浏览器请求后的处理过程。
 
 ![Figure 2: Multi-threaded Web Server Architecture](http://vertxer.org/images/Figure 2- Multi-threaded Web Server Architecture.jpg)
->上图是
+>上图描述了一个经典Web Server使用多线程模型，并发处理来自多个Web浏览器的请求。
 
 ![Figure 3: Client Connects to Reactive Web Server](http://vertxer.org/images/Figure 3- Client Connects to Reactive Web Server.jpg)
->上图是
+>上图是新的异步Web Server，利用了Initiation Dispatcher组件，把耗时的io操作从主线程Http Handler中解耦出去。这样主线程
 
 ![Figure 4: Client Sends HTTP Request to Reactive Web Server](http://vertxer.org/images/Figure 4- Client Sends HTTP Request to Reactive Web Server.jpg)
 >上图是
