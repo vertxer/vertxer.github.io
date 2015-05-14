@@ -124,3 +124,5 @@ GitHub: <https://github.com/vert-x3/>
 6. [Reactor - an object behavioral pattern for demultiplexing and dispatching handles for synchronous events](http://www.cs.wustl.edu/~schmidt/PDF/reactor-siemens.pdf) | Douglas C. Schmidt, 1997
 
 7. [Architecture of a Highly Scalable NIO-Based Server](https://today.java.net/article/2007/02/08/architecture-highly-scalable-nio-based-server) | Gregor Roth, 2007
+
+8. [Vert.3最新文档预览版](https://vertx.ci.cloudbees.com/view/vert.x-3/job/vert.x3-website/ws/target/site/docs/vertx-core/java/index.html) 
