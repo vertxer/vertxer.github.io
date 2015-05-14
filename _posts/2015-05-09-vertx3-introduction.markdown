@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Vert.x Introduction for CSDN Java 20 Year Anniversary!"
+title:  "关于Java框架Vert.x的一点思考"
 date:   2015-05-14 14:00:00
 categories: intro
 ---
@@ -53,195 +53,49 @@ Vert.x <http://vertx.io/> 是一个基于JVM的、轻量级的、高性能的应
 【笔者注】Vert.x3是对Vert.x2的重大升级，不仅仅是package从org.vertx到io.vertx的全面替换，一些重要的核心类也都做了破坏式的重构，几乎很难从vert.x2程序升级到vert.x3程序。下边是Vert.x3的一些功能升级。
 
 
+Vert.x 2.x中的模块体系去掉了。目前Vert.x 3.0推荐用Maven的模块体系，当然不仅限于Maven。
 
-###No more module system
-***The Vert.x module system has gone***. Now you create your verticles and 
-package them into standard java jars. These jars can be pushed to Maven 
-repositories (or bintray) just like any Maven artifact. 
+支持其他语言在Vert.x上的代码生成。
 
-When you use these artifacts in your application you specify them as 
-standard Maven dependencies in your project and they are resolved at 
-build-time, not at run-time like in Vert.x 2.0. 
+Vert.x 3.0项目构建，从Gradle改为Maven。
 
-Non Java verticles (e.g. JavaScript) can also be packaged in jars and 
-pushed as Maven artifacts. We will also support resolving in other ways 
-and from other places (e.g. at run-time and from npm modules) before 
-3.0.final. 
+为了更好的利用Java8的Lambdas表达式，只支持Java8。
 
-We recommend package your application into [a set of] of fat executable 
-jars which contain all the dependencies they need to run. The example 
-project (see bottom of this document) shows an example of that. 
+默认采用扁平的classpath结构。
 
-###Code generation of other language APIs 
+Verticle工厂方式简化。
 
-One of the big pain points of Vert.x 2.x development was keeping all the 
-other language APIs in sync as changes occur in the Java core APIs, as 
-it was a manually process. As we have a small team, this was becoming 
-unsustainable and hard to manage. 
+支持用编程的方式实例化Verticle、以及部署Verticle实例。
 
-In Vert.x 3.0 we maintain just the core Java API and we will generate 
-other language APIs from that. 
+当你阻塞Event loop主线程是警告。
 
-Generation works by inspecting the Java source of the core APIs before 
-compile and constructing an internal model from that. This is then fed 
-into a MVEL2 template (one for each language) which then outputs the 
-code in other languages. 
+移除了platform manager模块。
 
-In order for codegen to be feasible we specify a set of constraints that 
-any API that we run codegen on must follow. The codegen project details 
-these constraints: 
+集群管理可以用编程的方式调用。
 
-<https://github.com/vert-x3/codegen>
+支持集群建的共享数据。
 
-So far we have JavaScript and Groovy more or less complete, and Julien 
-is currently working on Ceylon. Other languages will follow. 
+完全重写了HTTP client，更完善。
 
-###Use of Maven for the Vert.x builds 
+WebSocket API改善。
 
-We now use Maven, not Gradle to build the Vert.x main project and the 
-"ext" projects. Please note that we do not mandate Maven for your own 
-Vert.x 3.0 projects - you shoud be able to use whatever build tool you 
-want for that (e.g. Gradle). Vert.x 3.0 projects generally have a very 
-simple setup (much simpler than Vert.x 2.0). 
+SSL/TLS的改善。 
 
-###Java 8 only 
+Event bus的API改善
 
-Vert.x 3.0 is Java 8 only. This is to take advantage of new language 
-features in Java 8, the most important of which is Lambdas which make 
-developing against event based APIs so much nicer than in previous 
-versions of Java. We also chose Java8 so we can use Nashorn - the new 
-high performance JavaScript engine that it contains. 
+支持Event bus代理。
 
-###Flat classpath by default 
+增加了'ext' stack 
 
-When deploying verticles, there is a simple single flat classpath (by 
-default). This should greatly simplify embedding and debugging. If you 
-do wish to deploy verticles with classloader isolation this is still 
-available as an option, but it's considered an edge case now. 
+增加了MongoService ，支持MongoDB的纯异步驱动。
 
-###Verticle factory simplification 
-
-There is no more `langs.properties`. Verticle factories are loaded from 
-the classpath using the service loader pattern. Verticle factories can 
-also be registered and unregistered programmatically. 
-
-###Deployment of Verticle instances 
-
-You can now instantiate verticles and deploy verticle *instances* 
-programmatically. 
-
-###Warnings if you block an event loop 
-
-You will now see warnings in the logs if you inadvertently (or 
-deliberately!) block an an event loop, so you can identify and fix the 
-issue more quickly. You will also see warnings if you block a worker 
-thread for too long. 
-
-###Removal of platform manager 
-
-The platform manager API has been removed, and methods for deploying 
-verticles have moved to the Vertx interface. The API for deploying 
-verticles is much simpler, so this should simplify things when embedding. 
-
-###Programmatic cluster manager 
-
-Cluster managers can now be specified programmatically 
-
-###Clustered shared data 
-
-Vert.x now supports a distributed Map API which works across the 
-cluster. You can put data in at one Vert.x node and read it from another. 
-
-We also provide an asynchronous cluster wide lock implementation, and 
-asynchronous cluster-wide counters. These are very useful building 
-blocks for distributed applications. 
-
-###Completely rewritten HTTP client 
-
-The HTTP client has been completely rewritten with much saner behaviour 
-for opening and closing connections, pipe-lining and keep alive. 
-
-###WebSocket API improvements 
-
-The WebSocket API has been improved so you can now send and receive 
-WebSocket frames. 
-
-###Improvements to SSL/TLS 
-
-The new SSL API allows you to configure certificates and keys in several 
-ways, not just with Java key stores. For example, with Strings and 
-Buffers (similar to Node.js). 
-
-We also support certificate revocation lists and specification of cipher 
-suites. 
-
-###Event bus API improvements 
-
-When registering a handler you now receive a Registration object which 
-you can later use to unregister. 
-
-We also now support custom codecs on the event bus so you can send any 
-object you want across the event bus (e.g. a POJO) as long as you write 
-a codec for it. We also support receiving messages as a different type 
-to what was sent, e.g. you could send a buffer which contains some BSON 
-and receive it as a POJO representing that BSON. 
-
-###Event bus proxies 
-
-You can register service interfaces with the event bus, then you can 
-interact with the service from a completely different verticle using a 
-proxy for the service. 
-
-###The 'ext' stack 
-
-https://github.com/vert-x3/ext 
-
-Vert.x extensions live in the `ext` project. This is functionality which 
-is not part of Vert.x core but contains useful stuff that people need to 
-write real applications with Vert.x. You can think of this plus Vert.x 
-core comprising the Vert.x "stack". 
-
-So far, ext just contains a few things including: SockJS, RouteMatcher, 
-and MongoService and Reactivestreams but will contain many other 
-services before 3.0.final. 
-
-A lot of the work in Vert.x 3.0 is in creating this stack. 
-
-###MongoService 
-
-This is a component of the ext stack. It's an API that lets you interact 
-with a MongoDB database. It uses the experimental 100% Async driver from 
-the MongoDB folks. You can deploy it as a verticle and interact with it 
-over the event bus using a proxy. 
-
-###ReactiveStreams 
+实现ReactiveStreams 。
 
 This is an implementation of <http://www.reactive-streams.org/>
 
-###Use of options classes 
+Options类的使用，可以构建参数进去。
 
-We now use options classes widely throughout Vert.x in order to 
-configure objects. This means a lot of the setter methods on interfaces 
-such as NetClient, NetServer, HttpClient and HttpServer have been removed. 
-
-###Example project 
-
-I've put together an example Maven project which shows how you might 
-write a simple application with Vert.x 3.0. 
-
-It's a simple web application that uses SockJS and also has a REST API. 
-It has a JavaScript main verticle which starts up the app and a Java 
-WebServer and a Groovy stock ticker. 
-
-<https://github.com/vert-x3/example-proj>
-
-##What's next? 
-
-** Most of Vert.x 3.0 core is done but there is a some more work to do 
-** More work on codegen 
-** Codegen templates for other language APIs (Scala, Ruby etc) 
-** Documentation, including JavaDoc/Asciidoc. 
-** The rest of the ext stack. This is where most of the work is. 
+样例工程。<https://github.com/vert-x3/example-proj>
 
 
 ##Vert.xCode location 代码位置
