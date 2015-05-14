@@ -26,23 +26,23 @@ Vert.x <http://vertx.io/> 是一个基于JVM的、轻量级的、高性能的应
 
 考古了一下Reactor模式，其理论最早由Washington University的Douglas C. Schmidt教授在1995年提出，在这片论文中完整了做了介绍：[Proactor - An Object Behavioral Pattern for Demultiplexing and Dispatching Handlers for Asynchronous Events](http://www.cs.wustl.edu/~schmidt/PDF/proactor.pdf) 。下边对其关键原理部分展开分析：
 
-![Figure 1: Typical Web Server Communication Software Architecture](http://vertxer.org/images/Figure 1- Typical Web Server Communication Software Ar- chitecture.jpg)
+![Figure 1: Typical Web Server Communication Software Architecture](http://vertxer.org/images/Figure 1- Typical Web Server Communication Software Architect.jpg)
 >上图描述了一个经典Web Server在收到Web浏览器请求后的处理过程。
 
 ![Figure 2: Multi-threaded Web Server Architecture](http://vertxer.org/images/Figure 2- Multi-threaded Web Server Architecture.jpg)
 >上图描述了一个经典Web Server使用多线程模型，并发处理来自多个Web浏览器的请求。
 
 ![Figure 3: Client Connects to Reactive Web Server](http://vertxer.org/images/Figure 3- Client Connects to Reactive Web Server.jpg)
->上图是新的异步Web Server，利用了Initiation Dispatcher组件，把耗时的io操作从主线程Http Handler中解耦出去。这样主线程
+>上图描述了Web浏览器连接到一个Reactor模式的Web Server处理过程。利用了Initiation Dispatcher组件，把耗时的io操作事件注册到Initiation Dispatcher组件。
 
 ![Figure 4: Client Sends HTTP Request to Reactive Web Server](http://vertxer.org/images/Figure 4- Client Sends HTTP Request to Reactive Web Server.jpg)
->上图是
+>上图描述了Web浏览器访问一个Reactor模式的Web Server处理过程。耗时io操作由其它线程执行，io执行完成后通知Initiation Dispatcher，再回到Http Handler执行。
 
 ![Figure 5: Client connects to a Proactor-based Web Server](http://vertxer.org/images/Figure 5- Client connects to a Proactor-based Web Server.jpg)
->上图是
+>上图是上图是Web浏览器连接一个Proactor模式的Web Server处理过程。和Reactor的主要区别是耗时io操作交给操作系统异步io库执行（例如GNU/Linux aio），操作系统异步io库执行完毕后，通过异步io通知机制（例如epoll）触发Completion Dispatch，再交给Http Handler执行。
 
 ![Figure 6: Client Sends requests to a Proactor-based Web Server](http://vertxer.org/images/Figure 6- Client Sends requests to a Proactor-based Web Server.jpg)
->上图是
+>上图是上图是Web浏览器访问一个Proactor模式的Web Server处理过程。和Reactor的主要区别是耗时io操作交给操作系统异步io库执行（例如GNU/Linux aio），操作系统异步io库执行完毕后，通过异步io通知机制（例如epoll）触发Completion Dispatch，再交给Http Handler执行。
 
 
 
