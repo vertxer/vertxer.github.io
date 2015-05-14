@@ -5,7 +5,7 @@ date:   2015-05-14 14:00:00
 categories: intro
 ---
 
-#Vert.x介绍
+#Vert.x简介
 
 在Java 20周年之际，Java用户对Java的抱怨与日俱增，比如内存管理、笨重的JavaEE等。而Java依然在[TIOBE编程语言排行榜](http://www.tiobe.com/index.php/content/paperinfo/tpci/index.html)上艰难的维持第一名的位置，随着一些新编程语言的兴起，这个领域目前呈现一种混战的态势。
 
@@ -21,10 +21,9 @@ Vert.x <http://vertx.io/> 是一个基于JVM的、轻量级的、高性能的应
 
 
 
-
 #Reactor模式
 
-考古了一下Reactor模式，其理论最早由Washington University的Douglas C. Schmidt教授在1995年提出，在这片论文中完整了做了介绍：[Proactor - An Object Behavioral Pattern for Demultiplexing and Dispatching Handlers for Asynchronous Events](http://www.cs.wustl.edu/~schmidt/PDF/proactor.pdf) 。下边对其关键原理部分展开分析：
+和传统Java框架的多线程模型相比，Vert.x/Netty是Reactor模式的Java实现。考古了一下Reactor模式，其理论最早由Washington University的Douglas C. Schmidt教授在1995年提出，在这片论文中完整了做了介绍：[Proactor - An Object Behavioral Pattern for Demultiplexing and Dispatching Handlers for Asynchronous Events](http://www.cs.wustl.edu/~schmidt/PDF/proactor.pdf) 。下边对其关键原理部分展开分析：
 
 ![Figure 1: Typical Web Server Communication Software Architecture](http://vertxer.org/images/Figure 1- Typical Web Server Communication Software Architect.jpg)
 >上图描述了一个经典Web Server在收到Web浏览器请求后的处理过程。
@@ -39,11 +38,12 @@ Vert.x <http://vertx.io/> 是一个基于JVM的、轻量级的、高性能的应
 >上图描述了Web浏览器访问一个Reactor模式的Web Server处理过程。耗时io操作由其它线程执行，io执行完成后通知Initiation Dispatcher，再回到Http Handler执行。
 
 ![Figure 5: Client connects to a Proactor-based Web Server](http://vertxer.org/images/Figure 5- Client connects to a Proactor-based Web Server.jpg)
->上图是上图是Web浏览器连接一个Proactor模式的Web Server处理过程。和Reactor的主要区别是耗时io操作交给操作系统异步io库执行（例如GNU/Linux aio），操作系统异步io库执行完毕后，通过异步io通知机制（例如epoll）触发Completion Dispatch，再交给Http Handler执行。
+>上图描述了Web浏览器连接一个Proactor模式的Web Server处理过程。和Reactor的主要区别是耗时io操作交给操作系统异步io库执行（例如GNU/Linux aio），操作系统异步io库执行完毕后，通过异步io通知机制（例如epoll）触发Completion Dispatch，再交给Http Handler执行。
 
 ![Figure 6: Client Sends requests to a Proactor-based Web Server](http://vertxer.org/images/Figure 6- Client Sends requests to a Proactor-based Web Server.jpg)
->上图是上图是Web浏览器访问一个Proactor模式的Web Server处理过程。和Reactor的主要区别是耗时io操作交给操作系统异步io库执行（例如GNU/Linux aio），操作系统异步io库执行完毕后，通过异步io通知机制（例如epoll）触发Completion Dispatch，再交给Http Handler执行。
+>上图描述了Web浏览器访问一个Proactor模式的Web Server处理过程。和Reactor的主要区别是耗时io操作交给操作系统异步io库执行（例如GNU/Linux aio），操作系统异步io库执行完毕后，通过异步io通知机制（例如epoll）触发Completion Dispatch，再交给Http Handler执行。
 
+事实上，Vert.x/Netty的Reactor实现部分是在Netty 4.0的代码中实现，重要的几个类是io.netty.channel.nio.NioEventLoop, io.netty.channel.epoll.EpollEventLoop, java.nio.channels.spi.SelectorProvider。
 
 
 
@@ -250,6 +250,9 @@ Vert.x 3.0 core工程位于github Eclipse主页:
 
 Vert.x 3.0的其它工程位于新的Vert-x3 umbrella organisation in 
 GitHub: <https://github.com/vert-x3/>
+
+##综述
+综合来看，Vert.x3还未正式发版，但其主体功能已经开发完毕并趋于稳定，在应用开发中已经可以考虑使用。程序员在适应了异步回调式的编程方式后，相信很快可能感受到Reactor模式的威力，和Vert.x的魅力。也许Vert.x会给Java和应用框架领域带来惊喜。
 
 
 ##参考资料
