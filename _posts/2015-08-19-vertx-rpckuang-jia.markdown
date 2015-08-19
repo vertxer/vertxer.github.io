@@ -96,7 +96,7 @@ CompletableFuture<String> hello(String what)
 
 ### 作者简介 ###
 
-![](./photo_liuxiaoxi.jpg)
+![](./images/photo_liuxiaoxi.jpg)
 
 刘小溪
 
