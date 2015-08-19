@@ -4,6 +4,7 @@ title:  "Vertx-rpc框架"
 date:   2015-08-19 14:00:00
 categories: intro
 ---
+
 by 刘小溪
 
 ### Vert.x的微服务
@@ -32,12 +33,12 @@ EventBus是Vert.x的核心,因为它的存在可以使得系统模块化解耦�
 
 举个例子,有一个业务逻辑,对用户的账户进行存款与取款这两个操作,如果用Java接口来描述就很Easy.
 
-```java
-interface Account {
-void saveMemory(int total);
-void withdrawMemory(int total);
-}
-```
+
+    interface Account {
+    void saveMemory(int total);
+    void withdrawMemory(int total); 
+    }
+
 
 如果换成`EventBus`你会发现没办法定义行为的名称(`java的方法`),只能通过`eb.send("address", json)`来调用目标接口.
 这里的json也许得包含`method`的描述.这样会显得很啰嗦,关键是对IDE不友好,重构起来不方便,严重影响团队开发流畅度.
@@ -52,24 +53,23 @@ void withdrawMemory(int total);
 我们继续上面的例子,根据接口我们会把项目分成两个Maven模块.`SPI`,`SPI-impl`,在parent的`pom.xml`定义好即可.
 下面我们先在`impl`的项目里启动好`service`并通过`EventBus`暴露服务.
 
-```java
 
-Vertx vertx = Vertx.vertx();
-String address = "serviceAddress";
+    Vertx vertx = Vertx.vertx();
+    String address = "serviceAddress";
 
-RPCServerOptions rpcServerOptions = new RPCServerOptions(vertx).setBusAddress(address).addService(new MyServiceImpl());
-new VertxRPCServer(rpcServerOptions);
-```
+    RPCServerOptions rpcServerOptions = new RPCServerOptions(vertx).setBusAddress(address).addService(new MyServiceImpl());
+    new VertxRPCServer(rpcServerOptions);
+
 
 以上四行代码就已经成功的定义了服务,是这里要注意`new MyServiceimpl()`必须实现`spi`项目里的`MyService`接口.下面我们来看调用方,怎么调用服务.
 
-```java
-Vertx vertx = Vertx.vertx();
-String address = "serviceAddress";
 
-RPCClientOptions<MyService> rpcClientOptions = new RPCClientOptions<MyService>(vertx).setBusAddress(address).setServiceClass(MyService.class);
-MyService myService = new VertxRPCClient<>(rpcClientOptions).bindService();
-```
+    Vertx vertx = Vertx.vertx();
+    String address = "serviceAddress";
+
+    RPCClientOptions<MyService> rpcClientOptions = new RPCClientOptions<MyService>(vertx).setBusAddress(address).setServiceClass(MyService.class);
+    MyService myService = new VertxRPCClient<>(rpcClientOptions).bindService();
+
 
 这里本质上是两行代码,一行定义了rpcClient的配置通过`RPCClientOptions`,另外一行直接绑定服务,通过`VertxRPCClient.bindService()`.
 最后得到了接口`MyService`.下面你就可以在客户端直接调用服务端的接口了,一切又回到了以前的面向接口编程 :)
@@ -80,22 +80,21 @@ MyService myService = new VertxRPCClient<>(rpcClientOptions).bindService();
 
 vertx-rpc除了包装EventBus使之可以通过Java标准方法调用外,还可以通过注解来定义每一个方法的超时时间.
 
-```java
-@RequestProp(timeout = 1, timeUnit = TimeUnit.SECONDS, retry = 2)
-void hello(String what, Handler<AsyncResult<String>> handler);
-```
+
+    @RequestProp(timeout = 1, timeUnit = TimeUnit.SECONDS, retry = 2)
+    void hello(String what, Handler<AsyncResult<String>> handler);
+
 
 这里就对hello方法定义了超时时间,以及超时重试次数,非常方便用于幂等的方法.
 上面的方法第二个参数是Vert.x的handler回调,这里也可以使用`RxJava`或者`Java8的CompletableFuture`
 
-```java
-Observable<String> hello(String what)
 
-//或者
+    Observable<String> hello(String what)
 
-CompletableFuture<String> hello(String what)
+    //或者
 
-```
+    CompletableFuture<String> hello(String what)
+
 具体可以参考[项目例子](https://github.com/stream1984/vertx-rpc-example)
 
 ### 作者简介 ###
