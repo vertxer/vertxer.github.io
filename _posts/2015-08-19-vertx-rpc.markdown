@@ -102,7 +102,7 @@ CompletableFuture<String> hello(String what)
 
 ### 作者简介 ###
 
-![](../images/photo_liuxiaoxi.jpg)
+![](http://vertxer.org/images/photo_liuxiaoxi.jpg)
 
 刘小溪
 
@@ -111,7 +111,7 @@ leap.as高级Java工程师, 关注Java异步高性能框架Vert.x以及容器化
 
 ----------
 
-PS：对Vert.x感兴趣的开发者朋友，可以移步去由炼石网络公司主办的[Vert.x Meetup#3](http://www.meetup.com/Vertx-Beijing/events/224580619/)，现场与大牛们零距离探讨技术问题，聆听Vert.x的最佳实践，您也可以成为vert.x模块的贡献者。
+PS：对Vert.x感兴趣的开发者朋友，可以移步去[Vert.x Meetup#3](http://www.meetup.com/Vertx-Beijing/events/224580619/)，现场与大牛们零距离探讨技术问题，聆听Vert.x的最佳实践，您也可以成为vert.x模块的贡献者。
 
 议程 | Agenda：
 
