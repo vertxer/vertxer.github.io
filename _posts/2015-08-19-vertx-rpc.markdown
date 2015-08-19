@@ -4,8 +4,6 @@ title:  "Vertx-rpc框架"
 date:   2015-08-19 14:00:00
 categories: intro
 ---
-# Vertx-rpc框架 #
-
 by 刘小溪
 
 ### Vert.x的微服务
@@ -102,7 +100,7 @@ CompletableFuture<String> hello(String what)
 
 ### 作者简介 ###
 
-![](http://vertxer.org/images/photo_liuxiaoxi.jpg)
+![Author](http://vertxer.org/images/photo_liuxiaoxi.jpg)
 
 刘小溪
 
