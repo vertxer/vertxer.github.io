@@ -96,7 +96,7 @@ CompletableFuture<String> hello(String what)
 
 ### 作者简介 ###
 
-![](./images/photo_liuxiaoxi.jpg)
+![](https://github.com/vertxer/vertxer.github.io/tree/master/images/photo_liuxiaoxi.jpg)
 
 刘小溪
 
